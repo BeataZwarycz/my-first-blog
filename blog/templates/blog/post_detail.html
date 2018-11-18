@@ -11,4 +11,20 @@
         <h1>{{ post.title }}</h1>
         <p>{{ post.text|linebreaksbr }}</p>
     </div>
+        <h1>New comment</h1>
+    <form method="POST" class="comment-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+    <div class="comment">
+                    {% for comment in comments %}
+                <div class="comment">
+                    <div class="date">
+                        <p>published: {{ comment.created_date }}</p>
+                    </div>
+                    <h1><a href="">{{ comment.author }}</a></h1>
+                    <p>{{ comment.text|linebreaksbr }}</p>
+                </div>
+                {% endfor %}
+    </div>
 {% endblock %}

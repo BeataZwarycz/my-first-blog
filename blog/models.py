@@ -14,11 +14,23 @@ class Post(models.Model): #definiujemy nasz model, class- oznacza, że tworzymy 
             default=timezone.now) #ustawiamy datę i godzinę
     published_date = models.DateTimeField(
             blank=True, null=True)
-
+#def oznacza, że jest to metoda, publish - jej nazwa
     def publish(self): # a to jest metoda(czynność)
         self.published_date = timezone.now()
         self.save()
 
     def __str__(self):
         return self.title
+
+"""Ten model jest odpowiedzialny za dodawanie komentarzy
+text - pole na komentarz, author - pole na wpisanie imienia, created_date - data publikacji"""
+class Comments(models.Model):
+    text = models.TextField() #miejsce na tekst
+    created_date = models.DateTimeField(default=timezone.now) #wyświetli się data publikacji
+    author = models.CharField(max_length=20)
+#wyświetli autora
+    def __str__(self):
+        return self.author +' napisał komentarz: ' + self.text
+
+
 
